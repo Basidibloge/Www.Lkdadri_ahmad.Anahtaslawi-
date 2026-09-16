@@ -42,7 +42,6 @@
             direction: ltr;
         }
         
-        /* اسم المعلم والعناوين الكبرى بخط عريض جداً وغليظ وبارز جداً */
         h1, h2, h3, h4, h5, h6, .font-royal-brown, .gold-title, .bio-title, .section-title {
             font-family: 'Tajawal', sans-serif;
             color: #ffffff !important;
@@ -50,7 +49,6 @@
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8), 0 0 15px rgba(52, 152, 219, 0.6);
         }
 
-        /* تضخيم اسم المعلم في الهيدر العلوي ليكون واضحاً وغليظاً تماماً */
         .gold-title {
             font-size: 24px !important;
             font-weight: 900 !important;
@@ -62,6 +60,9 @@
             font-family: 'Aref Ruqaa', 'Amiri', serif;
             color: #ffffff !important;
             font-weight: 700;
+        }
+        body.lang-ltr .calligraphy {
+            font-family: 'Tajawal', sans-serif;
         }
 
         p, span, a, small, label {
@@ -83,7 +84,6 @@
             margin-bottom: 25px;
         }
 
-        /* خلفية زرقاء مغلوقة قليلاً تحت الكتابات لحماية العين وسهولة القراءة */
         .text-shield {
             background: rgba(22, 45, 75, 0.92);
             border: 1px solid rgba(52, 152, 219, 0.4);
@@ -106,7 +106,6 @@
             background: transparent !important;
         }
 
-        /* أيقونات اللغات الدائرية */
         .lang-switch-container {
             display: flex;
             gap: 8px;
@@ -204,7 +203,6 @@
             font-size: 1.4rem; font-weight: bold; border: 2px solid #d4a373;
         }
 
-        /* صورة المعلم الكبيرة والبارزة في الاستقبال والسيرة الذاتية */
         .large-portrait-box {
             max-width: 450px;
             margin: 20px auto 30px auto;
@@ -246,7 +244,6 @@
             color: #ffffff;
         }
 
-        /* شبكة خبرة المعلم */
         .experience-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -261,7 +258,6 @@
             border: 1px solid rgba(52, 152, 219, 0.3);
         }
 
-        /* شريط الحركة اللانهائي */
         @keyframes silverGlow {
             0% { box-shadow: 0 0 10px #ffffff, 0 0 20px #3498db; border-color: #ffffff; }
             50% { box-shadow: 0 0 25px #ffffff, 0 0 40px #d4a373; border-color: #d4a373; }
@@ -287,6 +283,17 @@
             will-change: transform;
         }
 
+        /* في الفرنسية والإنجليزية نجعل الشريط قابلاً للتمرير اليدوي أو التوقف عند النهاية لمنع الدوران اللانهائي */
+        body[data-lang="fr"] .marquee-container, body[data-lang="en"] .marquee-container {
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        body[data-lang="fr"] .marquee-track, body[data-lang="en"] .marquee-track {
+            animation: none !important;
+            transform: none !important;
+            display: inline-flex;
+        }
+
         .circular-thumb {
             width: 110px;
             height: 110px;
@@ -302,7 +309,6 @@
             transform: scale(1.15);
         }
 
-        /* شبكة عرض الصور للرواق بدون وتساب وبدون نصوص */
         .room-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -581,7 +587,7 @@
         </div>
     </div>
 
-    <!-- 3. صفحة رواق المعلم قدادري أحمد - النحت السلاوي (للصور الـ 5 مع شريط فوق الصور) -->
+    <!-- 3. صفحة رواق المعلم قدادري أحمد - النحت السلاوي -->
     <div id="gallery-room" class="container section-box my-4">
         <div class="container-fluid p-4 paper-content royal-frame">
             <div class="text-center text-shield mb-4">
@@ -600,7 +606,7 @@
             </div>
             
             <div class="room-grid" id="roomGrid">
-                <!-- تعبئة صور الرواق الـ 5 بدون أزرار واتساب وبدون نصوص -->
+                <!-- تعبئة صور الرواق الـ 5 -->
             </div>
         </div>
     </div>
@@ -678,7 +684,6 @@
             const shopGrid = document.getElementById('shopGrid');
             const roomGrid = document.getElementById('roomGrid');
 
-            // 1. تعبئة المتجر بالقطع
             productImages.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'product-card';
@@ -695,7 +700,6 @@
                 shopGrid.appendChild(card);
             });
 
-            // 2. تعبئة صفحة رواق النحت السلاوي (صور فقط بدون وصف وبدون واتساب)
             roomImages.forEach(item => {
                 const card = document.createElement('div');
                 card.className = 'room-card';
@@ -705,7 +709,6 @@
                 roomGrid.appendChild(card);
             });
 
-            // 3. تعبئة الأشرطة المتحركة في الواجهة والسيرة (بصور المتجر الحقيقية)
             let thumbsHTML = '';
             for (let i = 0; i < 3; i++) {
                 productImages.forEach(item => {
@@ -715,7 +718,6 @@
             if(track) track.innerHTML = thumbsHTML;
             if(bioTrack) bioTrack.innerHTML = thumbsHTML;
 
-            // شريط الرواق (بصور الرواق الـ 5)
             let roomThumbsHTML = '';
             for (let i = 0; i < 3; i++) {
                 roomImages.forEach(item => {
@@ -727,13 +729,16 @@
             let scrollPos = 0;
             const speed = 0.5;
             function step() {
-                scrollPos += speed;
-                if (scrollPos >= track.scrollWidth / 3) {
-                    scrollPos = 0;
+                const currentLang = document.body.getAttribute('data-lang');
+                if (currentLang === 'ar') {
+                    scrollPos += speed;
+                    if (scrollPos >= track.scrollWidth / 3) {
+                        scrollPos = 0;
+                    }
+                    if(track) track.style.transform = `translateX(${scrollPos}px)`;
+                    if(bioTrack) bioTrack.style.transform = `translateX(${scrollPos}px)`;
+                    if(roomTrack) roomTrack.style.transform = `translateX(${scrollPos}px)`;
                 }
-                if(track) track.style.transform = `translateX(${scrollPos}px)`;
-                if(bioTrack) bioTrack.style.transform = `translateX(${scrollPos}px)`;
-                if(roomTrack) roomTrack.style.transform = `translateX(${scrollPos}px)`;
                 requestAnimationFrame(step);
             }
             requestAnimationFrame(step);
@@ -822,16 +827,16 @@
                 home_welcome_title: "Bienvenue dans l'Univers de la Céramique",
                 home_welcome_desc: "Une vitrine artistique mariant le savoir-faire manuel et la magie des motifs marocains.",
                 craft_history_title: "L'Art de la Poterie à Salé",
-                craft_history_desc: "La ville de Salé est un berceau historique de l'artisanat marocain et de la poterie traditionnelle...",
-                master_brilliance_desc: "Maâlem Ahmed Kdadri se distingue par son génie et sa maîtrise exceptionnelle...",
+                craft_history_desc: "La ville de Salé est un berceau historique de l'artisanat marocain et de la poterie traditionnelle. Cet art ancestral repose sur le modelage de l'argile brute pour créer des chefs-d'œuvre uniques.",
+                master_brilliance_desc: "Maâlem Ahmed Kdadri se distingue par son génie et sa maîtrise exceptionnelle, élevant la poterie au rang d'art plastique raffiné.",
                 marquee_title: "Bande de Défilement des Œuvres Disponibles",
                 portrait_caption: "🇲🇦 Maître Ahmed Kdadri — Salé",
                 cv_main_heading: "Un Parcours d'Excellence & de Passion pour l'Argile",
-                cv_full_text1: "Maâlem Ahmed Kdadri est une référence incontournable de la sculpture...",
+                cv_full_text1: "Maâlem Ahmed Kdadri est une référence incontournable de la sculpture et du modelage sur argile à Salé. Il a consacré sa vie à préserver cet héritage.",
                 cv_full_text2: "Diplômé du musée de l'administration de l'artisanat traditionnel des Oudaïas à Rabat en 1972.",
-                cv_full_text3: "Il a consacré sa vie à préserver et sublimer cet art ancestral.",
+                cv_full_text3: "Il a participé à de nombreuses expositions nationales et internationales pour promouvoir l'artisanat marocain.",
                 master_works_title: "✨ Chefs-d'œuvre & Créations Intemporelles",
-                master_works_desc: "Maâlem Ahmed Kdadri façonne des créations uniques reflétant le raffinement marocain.",
+                master_works_desc: "Maâlem Ahmed Kdadri façonne des créations uniques reflétant le raffinement marocain, des fontaines décoratives aux sculptures folkloriques.",
                 bio_marquee_title: "Visite Visuelle des Œuvres",
                 exp1_title: "🏺 100% Fait Main",
                 exp1_desc: "Chaque figurine est sculptée à la main avec minutie sans moules industriels.",
@@ -862,16 +867,16 @@
                 home_welcome_title: "Welcome to the World of Pottery",
                 home_welcome_desc: "An artistic showcase combining manual craftsmanship with timeless Moroccan motifs.",
                 craft_history_title: "The Art of Pottery in Salé",
-                craft_history_desc: "The historic city of Salé is a major hub of traditional Moroccan craftsmanship...",
-                master_brilliance_desc: "Master Ahmed Kdadri stands out with his unique genius and exceptional mastery...",
+                craft_history_desc: "The historic city of Salé is a major hub of traditional Moroccan craftsmanship. Rooted in rich cultural heritage, this timeless art transforms natural clay into exquisite masterpieces.",
+                master_brilliance_desc: "Master Ahmed Kdadri stands out with his unique genius and exceptional mastery, elevating pottery into fine art through dedicated handcrafting.",
                 marquee_title: "Available Artworks Scroll",
                 portrait_caption: "🇲🇦 Master Ahmed Kdadri — Salé",
                 cv_main_heading: "A Lifetime of Mastery & Artistic Clay Sculpting",
-                cv_full_text1: "Master Ahmed Kdadri is an accomplished master in the art of handcrafted clay sculpting in Salé.",
+                cv_full_text1: "Master Ahmed Kdadri is an accomplished master in the art of handcrafted clay sculpting in Salé, dedicating his life to preserving ancestral heritage.",
                 cv_full_text2: "Graduate of the Museum of Traditional Handicraft Administration in the Oudaïas, Rabat, in 1972.",
-                cv_full_text3: "He dedicated his life to preserving and innovating traditional Moroccan pottery and sculpture.",
+                cv_full_text3: "He has participated in numerous national and international exhibitions, sharing the beauty of Moroccan artistry worldwide.",
                 master_works_title: "✨ Masterpieces & Timeless Creations",
-                master_works_desc: "Master Ahmed Kdadri expertly crafts unique creations reflecting true Moroccan elegance.",
+                master_works_desc: "Master Ahmed Kdadri expertly crafts unique creations reflecting true Moroccan elegance, including architectural fountains and cultural statues.",
                 bio_marquee_title: "Visual Tour of Artworks",
                 exp1_title: "🏺 100% Master Handcrafting",
                 exp1_desc: "Every statue is shaped individually by hand with intricate attention to detail.",
