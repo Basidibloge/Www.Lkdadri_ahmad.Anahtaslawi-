@@ -8,6 +8,10 @@
     <meta content="المعلم أحمد قدادري, فن الخزف التقليدي, النحت السلاوي, فخار سلا" name="keywords">
     <meta content="الموقع الرسمي للمعلم أحمد قدادري خريج متحف إدارة الصناعة التقليدية بالوداية بالرباط سنة 1972" name="description">
 
+    <!-- Security Headers (ترويسات حماية المتصفح) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700;900&family=Tajawal:wght@500;800;900&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet"> 
@@ -25,6 +29,7 @@
             100% { box-shadow: inset 0 0 30px rgba(52, 152, 219, 0.2); }
         }
 
+        /* منع التحديد والنسخ تماماً عبر CSS */
         body {
             font-family: 'Cairo', sans-serif;
             text-align: right;
@@ -36,7 +41,47 @@
             color: #ffffff;
             scroll-behavior: smooth;
             animation: pageGlow 6s infinite ease-in-out;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
+
+        /* طبقة حماية الشاشة (Screenshot / Recorder Blocker) */
+        #screenshot-shield {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0b1a2e;
+            z-index: 99999999;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        #screenshot-shield h2 {
+            color: #d4a373 !important;
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        /* منع سحب وحفظ الصور عبر CSS */
+        img {
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            pointer-events: none; /* تعطيل تفاعل الماوس المباشر لحماية الصور من السحب والحفظ */
+        }
+        /* السماح فقط للأزرار والروابط بالتفاعل */
+        a, button, input, .circular-thumb, .room-card, .product-card img, .large-portrait-frame img {
+            pointer-events: auto !important;
+        }
+
         body.lang-ltr, body[data-lang="fr"], body[data-lang="en"] {
             text-align: left;
             direction: ltr;
@@ -283,7 +328,6 @@
             will-change: transform;
         }
 
-        /* في الفرنسية والإنجليزية نجعل الشريط قابلاً للتمرير اليدوي أو التوقف عند النهاية لمنع الدوران اللانهائي */
         body[data-lang="fr"] .marquee-container, body[data-lang="en"] .marquee-container {
             overflow-x: auto;
             white-space: nowrap;
@@ -404,6 +448,7 @@
             bottom: 15px;
             left: 15px;
             background-color: #25d366;
+            content: "";
             color: white;
             border-radius: 50%;
             width: 50px;
@@ -430,6 +475,14 @@
 </head>
 
 <body>
+    <!-- درع حماية الشاشة (Screenshot Shield) -->
+    <div id="screenshot-shield">
+        <div>
+            <h2>🔒 محتوى محمي بحقوق النشر</h2>
+            <p class="mt-2" style="color: #ffffff;">لا يمكن التقاط صورة للشاشة أو تسجيلها حمايةً لحقوق المعلم أحمد قدادري.</p>
+        </div>
+    </div>
+
     <!-- الهيدر الموحد والقائمة -->
     <div class="container py-3">
         <div class="d-flex justify-content-between align-items-center p-3 paper-content royal-frame">
@@ -544,7 +597,7 @@
                     يُعتبر المعلم أحمد قدادري واحداً من ألمع الأسماء وأبرز الرموز الخالدة في تاريخ صناعة الخزف والفخار التقليدي والنحت السلاوي بالمملكة المغربية. وُلد وترعرع في بيئة تشبعت بعبق التراث، حيث صقل موهبته الفطرية باجتهاد منقطع النظير حتى بات مرجعاً يقتدى به في تطويع الطين الخام وتحويله إلى تحف فنية ناطقة بالجمال والتاريخ.
                 </p>
                 <p style="line-height: 2; font-size: 1.1rem; text-align: justify;" data-text="cv_full_text2">
-                    تتويجاً لمساره الأكاديمي والفني الراقي، يُعد المعلم أحمد قدادري **خريج متحف إدارة الصناعة التقليدية بالوداية بالرباط سنة 1972**؛ وهو الصرح العريق الذي تخرج منه عمالقة الصنعة التقليدية المغربية. وقد أتاح له هذا التكوين الرصين دمج دقة القواعد الهندسية والفنية مع أصالة التراث الموروث عن الأجداد.
+                    تتويجاً لمساره الأكاديمي والفني الراقي، يُعد المعلم أحمد قدادري <strong>خريج متحف إدارة الصناعة التقليدية بالوداية بالرباط سنة 1972</strong>؛ وهو الصرح العريق الذي تخرج منه عمالقة الصنعة التقليدية المغربية. وقد أتاح له هذا التكوين الرصين دمج دقة القواعد الهندسية والفنية مع أصالة التراث الموروث عن الأجداد.
                 </p>
                 <p style="line-height: 2; font-size: 1.1rem; text-align: justify;" data-text="cv_full_text3">
                     كرّس المعلم أحمد قدادري حياته بأكملها لإحياء هذا الإرث العريق وتطويره بلمسات معاصرة، مشاركاً في العديد من المعارض الوطنية والدولية، ومهندساً لكبرى الديكورات، النوافير المائية، والتماثيل الفولكلورية التي تزين أرقى الفضاءات والمتاحف والمنازل الفاخرة داخل المغرب وخارجه.
@@ -646,8 +699,60 @@
         <p class="mb-0 font-weight-bold text-shield d-inline-block px-4" style="font-size: 0.95rem; color: #ffffff; font-weight: 900;" data-text="footer_text">جميع الحقوق محفوظة © 2026 — النحت السلاوي (المعلم أحمد قدادري)</p>
     </div>
 
-    <!-- JavaScript للتحكم في اللغات، الأشرطة اللانهائية، والرواق -->
+    <!-- JavaScript للتحكم في اللغات، حماية النسخ، والتصوير -->
     <script>
+        // 🛡️ أكواد الحماية ضد الاختراق والنسخ والتصوير (Anti-Inspection & Anti-Screenshot)
+        
+        // 1. منع النقر بزر الماوس الأيمن (Right Click)
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // 2. منع اختصارات لوحة المفاتيح للنسخ، فتح الأدوات، أو الحفظ (Ctrl+C, Ctrl+U, Ctrl+S, F12, PrintScreen)
+        document.addEventListener('keydown', event => {
+            if (
+                event.key === 'F12' || 
+                event.key === 'PrintScreen' ||
+                (event.ctrlKey && (event.key === 'u' || event.key === 's' || event.key === 'c' || event.key === 'a' || event.key === 'p' || event.key === 'i' || event.key === 'j'))
+            ) {
+                event.preventDefault();
+                triggerShield();
+                return false;
+            }
+        });
+
+        // 3. تفعيل درع الحماية عند محاولة أخذ لقطة شاشة أو مغادرة المتصفح
+        const shield = document.getElementById('screenshot-shield');
+        function triggerShield() {
+            shield.style.display = 'flex';
+            setTimeout(() => {
+                shield.style.display = 'none';
+            }, 3000);
+        }
+
+        // كشف محاولة تصوير الشاشة عبر مفتاح PrintScreen
+        window.addEventListener('keyup', (e) => {
+            if (e.key === 'PrintScreen') {
+                navigator.clipboard.writeText(''); // مسح الحافظة
+                triggerShield();
+            }
+        });
+
+        // حماية إضافية عند خروج التركيز عن النافذة (تبديل النوافذ أو محاولة السكرين)
+        window.addEventListener('blur', () => {
+            shield.style.display = 'flex';
+        });
+        window.addEventListener('focus', () => {
+            shield.style.display = 'none';
+        });
+
+        // 4. منع سحب الصور (Drag & Drop)
+        document.addEventListener('dragstart', event => {
+            if (event.target.tagName === 'IMG') {
+                event.preventDefault();
+            }
+        });
+
+
+        // 🖼️ بيانات المعرض والمتجر
         const roomImages = [
             { id: 'r1', url: "https://k.top4top.io/p_3880n7gg40.jpg", title: "مدخل الفضاء التراثي والشخصيات الشعبية" },
             { id: 'r2', url: "https://l.top4top.io/p_3880d12na1.jpg", title: "موكب الشخصيات الفولكلورية المغربية" },
@@ -691,7 +796,7 @@
                 card.innerHTML = `
                     <img src="${item.url}" alt="${item.title}" onclick="openLightbox('${item.url}')">
                     <div class="p-3 text-center text-shield" style="margin: 10px; border-radius: 6px;">
-                        <h5 class="font-weight-bold mb-3" style="color: #ffffff; font-weight: 800;">${item.title}</h5>
+                        <h5 class="font-weight-bold mb-3" style="color: #ffffff; font-weight: 800;" data-text="p_title">تحفة فخارية أصيلة</h5>
                         <a href="https://wa.me/212663249090?text=السلام%20عليكم%20المعلم%20أحمد%20قدادري،%20أنا%20مهتم%20بهذه%20القطعة%20ورابطها:%20${encodeURIComponent(item.url)}" target="_blank" class="btn btn-success btn-sm font-weight-bold w-100 py-2">
                             <i class="fab fa-whatsapp mr-1"></i> <span data-text="btn_interested">أنا مهتم بهذه القطعة</span>
                         </a>
@@ -809,6 +914,7 @@
                 room_marquee_title: "شريط الرواق التفاعلي",
                 gallery_subtitle: "استكشف كافة الأعمال والتحف الفخارية، واضغط على زر الواتساب للاستفسار عن أي قطعة مباشرة.",
                 btn_interested: "أنا مهتم بهذه القطعة",
+                p_title: "تحفة فخارية أصيلة",
                 contact_title: "هل ترغب بطلب قطع مخصصة أو الاستفسار؟",
                 contact_desc: "تواصل مع المعلم أحمد قدادري مباشرة عبر الواتساب لطلبات الجملة والتفصيل والتحف الفنية.",
                 location_text: "سلا، المملكة المغربية",
@@ -830,6 +936,7 @@
                 craft_history_desc: "La ville de Salé est un berceau historique de l'artisanat marocain et de la poterie traditionnelle. Cet art ancestral repose sur le modelage de l'argile brute pour créer des chefs-d'œuvre uniques.",
                 master_brilliance_desc: "Maâlem Ahmed Kdadri se distingue par son génie et sa maîtrise exceptionnelle, élevant la poterie au rang d'art plastique raffiné.",
                 marquee_title: "Bande de Défilement des Œuvres Disponibles",
+                quote_text: "« Là où l'argile s'exprime avec fierté, et la beauté se mue en or et authenticité »",
                 portrait_caption: "🇲🇦 Maître Ahmed Kdadri — Salé",
                 cv_main_heading: "Un Parcours d'Excellence & de Passion pour l'Argile",
                 cv_full_text1: "Maâlem Ahmed Kdadri est une référence incontournable de la sculpture et du modelage sur argile à Salé. Il a consacré sa vie à préserver cet héritage.",
@@ -849,7 +956,8 @@
                 room_marquee_title: "Bande Interactive du Salon",
                 gallery_subtitle: "Explorez toutes nos œuvres et poteries. Cliquez sur WhatsApp pour toute demande directe.",
                 btn_interested: "Je suis intéressé par cette pièce",
-                contact_title: "Intéressé par une commande personnalisée ?",
+                p_title: "Pièce de Poterie Authentique",
+                contact_title: "Intéressé par une commande personnalizada ?",
                 contact_desc: "Contactez directement Maâlem Ahmed Kdadri sur WhatsApp.",
                 location_text: "Salé, Royaume du Maroc",
                 contact_wa_btn: "Contacter sur WhatsApp",
@@ -870,6 +978,7 @@
                 craft_history_desc: "The historic city of Salé is a major hub of traditional Moroccan craftsmanship. Rooted in rich cultural heritage, this timeless art transforms natural clay into exquisite masterpieces.",
                 master_brilliance_desc: "Master Ahmed Kdadri stands out with his unique genius and exceptional mastery, elevating pottery into fine art through dedicated handcrafting.",
                 marquee_title: "Available Artworks Scroll",
+                quote_text: "« Where clay speaks proudly, and beauty turns into gold and heritage »",
                 portrait_caption: "🇲🇦 Master Ahmed Kdadri — Salé",
                 cv_main_heading: "A Lifetime of Mastery & Artistic Clay Sculpting",
                 cv_full_text1: "Master Ahmed Kdadri is an accomplished master in the art of handcrafted clay sculpting in Salé, dedicating his life to preserving ancestral heritage.",
@@ -889,6 +998,7 @@
                 room_marquee_title: "Interactive Gallery Ribbon",
                 gallery_subtitle: "Explore all pottery and art pieces. Click WhatsApp to inquire directly about any piece.",
                 btn_interested: "I am interested in this piece",
+                p_title: "Authentic Pottery Piece",
                 contact_title: "Interested in custom orders or inquiries?",
                 contact_desc: "Reach out directly to Maâlem Ahmed Kdadri on WhatsApp.",
                 location_text: "Salé, Kingdom of Morocco",
